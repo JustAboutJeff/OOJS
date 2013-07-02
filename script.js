@@ -19,10 +19,9 @@ $(document).ready(function () {
 });
 
 function updateOven() {
-    for (i = 0; i < Oven.items.length; i++) {
-        batch = Oven.items[i];
-        $('td#rack_' + i).addClass(batch.getState()).text(batch.batchType + ' [' + batch.getState() + ']');
-    }
+  $.each(Oven.items, function(i, batch){
+    $('td#rack_' + i).addClass(batch.getState()).text(batch.batchType + ' [' + batch.getState() + ']');
+  });
 }
 
 function moveBatchFromTableToOven($element, batchId) {
@@ -65,13 +64,6 @@ function PrepTable() {
     this.items = [];
     this.addBatch = function (batch) {
         this.items.push(batch);
-    };
-    this.findBatch = function (batchId) {
-        for (i = 0; i < this.items.length; i++) {
-            if (this.items[i].batchId === batchId) {
-                return this.items[i];
-            }
-        }
     };
     this.removeBatch = function (batchId) {
         for (i = 0; i < this.items.length; i++) {
