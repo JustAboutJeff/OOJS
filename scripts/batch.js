@@ -1,7 +1,7 @@
-function Batch(batchType, bakeTime, batchId) {
-    this.batchType = batchType;
-    this.bakeTime = bakeTime;
-    this.batchId = batchId;
+function Batch(formHash) {
+    this.batchType = formHash.batchType;
+    this.bakeTime = formHash.bakeTime;
+    this.batchId = formHash.batchId;
     this.ovenTime = 0;
 }
 

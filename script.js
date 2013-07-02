@@ -4,7 +4,11 @@ var Controller = {
     var myOven = new Oven();
     $('#new_batch').submit(function (event) {
         event.preventDefault();
-        myPrepTable.updatePrepTable();
+        formHash = getFormInput();
+        var newButton = '<button class="add_to_oven" data-batch-id=' + formHash.batchId + '>add to oven</button>';
+        $('<li>').appendTo('ul#prep_batches').html(formHash.batchType + newButton);
+        var myBatch = new Batch(formHash);
+        myPrepTable.addBatch(myBatch);
         $(this).find("input[type=text], input[type=number]").val("");
     });
 
@@ -30,6 +34,15 @@ var Controller = {
       var batch_object = myPrepTable.removeBatch(batchId);
       myOven.addBatch(batch_object);
       $element.parent().remove();
+    }
+
+    function getFormInput(){
+      hash = {
+        batchType: $('input[name=batch_type]').val(),
+        bakeTime: $('input[name=bake_time]').val(),
+        batchId: event.timeStamp
+      };
+      return hash;
     }
   }
 };
